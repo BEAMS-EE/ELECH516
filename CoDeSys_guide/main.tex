@@ -1,6 +1,6 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[utf8x]{inputenc}
-\usepackage[OT2,T1]{fontenc}
+\usepackage[T1]{fontenc}
 %\usepackage{stringenc} % for grffile
 \usepackage{ucs}
 \usepackage{amsthm} %numéroter les questions
@@ -36,14 +36,14 @@
 \usepackage{booktabs}
 \usepackage{rotating}
 
-\newdateformat{mydate}{2014--2015}%hack pour remplacer \THEYEAR
+\newdateformat{mydate}{2014--2016}%hack pour remplacer \THEYEAR
 
 %cyr
 %\newcommand\textcyr[1]{{\fontencoding{OT2}\fontfamily{wncyr}\selectfont #1}}
 
 %% fancy header & foot
 \pagestyle{fancy}
-\lhead{[ELEC-H-542] Programmable logic controllers (PLC)}
+\lhead{[ELEC-H-516] Programmable logic controllers (PLC)}
 \rhead{\mydate\today\\ page \thepage}
 \cfoot{}
 %%
@@ -54,15 +54,18 @@
 }
 
 \hypersetup{
-pdftitle={[ELEC-H-542] Programmable logic controllers (PLC)},
+pdftitle={[ELEC-H-516] Programmable logic controllers (PLC)},
 pdfauthor={Ken Hasselmann, ©2014-2015 ULB - BEAMS  },
 pdfsubject={PLC}
 }
 
 \date{\vspace{-1cm}\mydate\today}
-\title{\vspace{-2cm} ELEC-H-542 \\ Programmable Logic controllers \\
+\title{\vspace{-2cm} ELEC-H-516 \\ Programmable Logic controllers \\
                                 Basic usage of CoDeSys 3.5}
 
+% TODO How to change language
+% TODO Give a full example of ladder diagram and GRAFCET
+% TODO Show how the simulation works (with the state changing)
 
 \begin{document}
 \maketitle
@@ -81,7 +84,7 @@ First create a new project, choose a standard project.
 \label{fig:creation}
 \end{figure}
 
-CoDeSys will then ask you to choose tour device, since we are going to use simulation, we let the default value of "Control Win V3".
+CoDeSys will then ask you to choose tour device, since we are going to use simulation, we let the default value of ``Control Win V3".
 Meanwhile, we change the value of the language for PLC\_PRG.
 CoDeSys supports all languages described by the standard IEC-61131:
 
@@ -135,9 +138,18 @@ You can now enter your inputs and outputs, the figure bellow gives an example.
 \end{figure}
 
 
+\section{Variables}
+
+\subsection{Syntax}
+The syntax of the variables is such that their name can not contain the dot ``." character.
+Past this detail, the grammar is as follows: \texttt{variable\_name: Type := value;}, the \texttt{value} part being facultative.
+
+\subsection{Types}
+
+
 \section{Ladder programming}
 
-Elements of for ladder programming are available in the left panel and on the top bar.
+Elements of for ladder programming are available in the right panel and on the top bar.
 Local variables can be used to add intermediate variables that are not inputs or outputs (they are only usable in the current POU (program organization unit)). Here the POU is the PLC\_PRG file in ladder laguage.
 
 \begin{figure}[h!]
@@ -148,7 +160,7 @@ Local variables can be used to add intermediate variables that are not inputs or
 \label{fig:network}
 \end{figure}
 
-You can select variables to assign to the different elements of your network by clicking on the "..." icon next to the name the the element (default: "???").
+You can select variables to assign to the different elements of your network by clicking on the ``..." icon next to the name of the element (which is ``???" by default).
 Then simply assign the variables by selecting them.
 The same goes with local variables, both are available in this menu.
 
@@ -160,10 +172,28 @@ The same goes with local variables, both are available in this menu.
 \label{fig:sel}
 \end{figure}
 
+\paragraph{Edge detection}
+Add a contact to your network, then right-click it and change it to ``Edge Detection" to get a rising edge detector.
+Repeat the operation to have a falling edge detector.
+
+\paragraph{Parallel branch}
+In order to have a parallel branch that comes back up to the same output (see fig~\ref{fig:ladder-parallel}), you first need an element on the network.
+Right-click it and choose Insert Contact Parallel.
+
+
+
+% #######    ########      ###     #########   #######   #########  ##########
+% ##         ##     ##    ## ##    ##         ##     ##  ##             ##
+% ##         ##     ##   ##   ##   ##         ##         ##             ##
+% ##   ####  ########   ##     ##  ######     ##         ######         ##
+% ##     ##  ##   ##    #########  ##         ##         ##             ##
+% ##     ##  ##    ##   ##     ##  ##         ##     ##  ##             ##
+% ########   ##     ##  ##     ##  ##          #######   #########      ##
+
 \section{Grafcet programming}
 
-Elements of grafcet programming are available in the left panel as well as on the top bar.
-Just life for ladder programming, local variables can be used to add intermediate variables that are not inputs or outputs (they are only usable in the current POU (program organization unit)). Here the POU is the PLC\_PRG file in grafcet laguage.
+Elements of grafcet programming are available in the right panel as well as on the top bar.
+Just like for ladder programming, local variables can be used to add intermediate variables that are not inputs or outputs (they are only usable in the current POU (program organization unit)). Here the POU is the PLC\_PRG file in grafcet laguage.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -188,9 +218,50 @@ See \vref{fig:tabgraf} for details on the different possibilities.
 \label{fig:tabgraf}
 \end{figure}
 
-
 Selection of variables is similar to the selection in ladder programming.
 
+\subsection{Transition}
+Several conditions can be concatenated in a single transition expression using \texttt{AND} and \texttt{OR}.
+
+\paragraph{Timer}
+A transition can be fired according to the time spent in the previous step (see fig~\ref{fig:transition-timer}).
+To fire the transition after two seconds have been spent in the step \texttt{step0}, you would write:
+\begin{verb}
+  step0.t > t#2s
+\end{verb}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{transition-timer.png}
+  \end{center}
+  \caption{Using a timer on a transition}
+  \label{fig:transition-timer}
+\end{figure}
+
+\subsection{Convergence and divergence}
+Convergences and divergences are generated using the ``branch" tool.
+To create an AND-divergence, select a step you want to be part of a branch, and create a left or right branch (either \textit{via} right-click or the toolbar).
+To create an OR-divergence, do the same thing, but selecting a transition.
+
+\subsection{Useful modules}
+Several modules can be quite useful:
+\begin{description}
+  \item[CTU] Counter\footnote{A \texttt{WORD} is 16-bit long.}
+  \item[TON] Timer
+\end{description}
+
+Note that to easily obtain the documentation to a specific module, right-click on it $\rightarrow$ ``browse" $\rightarrow$ ``Go to definition".
+
+
+
+
+% #######   ########   ##       ##  ##     ##
+% ##    ##     ##      ###     ###  ##     ##
+% ##           ##      ## ## ## ##  ##     ##
+% #######      ##      ##  ###  ##  ##     ##
+%       ##     ##      ##       ##  ##     ##
+% ##    ##     ##      ##       ##  ##     ##
+% #######   ########   ##       ##   #######
 
 \section{Simulation and visualization}
 \subsection{Setup}
