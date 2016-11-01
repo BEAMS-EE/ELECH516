@@ -36,6 +36,7 @@
 \usepackage{booktabs}
 \usepackage{rotating}
 
+
 \newdateformat{mydate}{2014--2016}%hack pour remplacer \THEYEAR
 
 %cyr
@@ -84,17 +85,17 @@ First create a new project, choose a standard project.
 \label{fig:creation}
 \end{figure}
 
-CoDeSys will then ask you to choose tour device, since we are going to use simulation, we let the default value of ``Control Win V3".
+CoDeSys will then ask you to choose your device, since we are going to use simulation, we let the default value ``Control Win V3".
 Meanwhile, we change the value of the language for PLC\_PRG.
 CoDeSys supports all languages described by the standard IEC-61131:
 
 \begin{itemize}
-\item Textual Languages:
+\item Textual languages:
 \begin{itemize}
 \item Instruction List (IL)
 \item Structured Text (ST)
 \end{itemize}
-\item Grafic Languages:
+\item Graphical languages:
 \begin{itemize}
 \item Sequential Function Chart (SFC) (Grafcet)
 \item Function Block Diagram (FBD)
@@ -111,7 +112,7 @@ CoDeSys supports all languages described by the standard IEC-61131:
 \label{fig:select}
 \end{figure}
 
-Once done, click on the PLC\_PRG file on the left, you will get a window similar to the one bellow I chose ladder for this example).
+Once it's done, click on the PLC\_PRG file on the left, you will get a window similar to the one on figure~\ref{fig:main} (we chose ladder for this example).
 
 \begin{figure}[h!]
 	\begin{center}
@@ -121,13 +122,13 @@ Once done, click on the PLC\_PRG file on the left, you will get a window similar
 \label{fig:main}
 \end{figure}
 
-Select the Application and right click on it or go to Project->Add object, and select Visualization.
-This will create the environnement to run tour simulation with visual objects like buttons or lights.
+Select the \texttt{Application} on the left and right click on it or go to Project->Add object, and select \texttt{Visualization}.
+This will create the environment to run your simulation with visual objects like buttons or lights.
 
-We will start by creating a Global Variable List to simulate the inputs and outputs of a real system (as we don't actually have a PLC).\\
-Right click on Application then Add object->Global Variable List.\\
+We will start by creating a Global Variable List to simulate the inputs and outputs of a real system.\\
+Right click on \texttt{Application} then Add object->Global Variable List.\\
 
-You can now enter your inputs and outputs, the figure bellow gives an example.
+You can now enter your inputs and outputs, the figure~\ref{fig:glob_var} gives an example.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -150,8 +151,8 @@ See ``Data type" in the doc.
 
 \section{Ladder programming}
 
-Elements of for ladder programming are available in the right panel and on the top bar.
-Local variables can be used to add intermediate variables that are not inputs or outputs (they are only usable in the current POU (program organization unit)). Here the POU is the PLC\_PRG file in ladder laguage.
+Elements of ladder programming are available in the right panel and on the top bar, as the figure~\ref{fig:network} highlights them.
+Local variables can be used to add intermediate variables that are not inputs or outputs (they are only usable in the current POU (program organization unit). Here, the POU is the PLC\_PRG file in ladder laguage.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -162,8 +163,7 @@ Local variables can be used to add intermediate variables that are not inputs or
 \end{figure}
 
 You can select variables to assign to the different elements of your network by clicking on the ``..." icon next to the name of the element (which is ``???" by default).
-Then simply assign the variables by selecting them.
-The same goes with local variables, both are available in this menu.
+Then simply assign the variables by selecting them on figure~\ref{fig:sel}.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -178,7 +178,7 @@ Add a contact to your network, then right-click it and change it to ``Edge Detec
 Repeat the operation to have a falling edge detector.
 
 \paragraph{Parallel branch}
-In order to have a parallel branch that comes back up to the same output (see fig~\ref{fig:ladder-parallel}), you first need an element on the network.
+In order to have a parallel branch that comes back up to the same output (like \texttt{Start\_1} and \texttt{Pump\_1} on fig~\ref{fig:network}), you first need an element on the network.
 Right-click it and choose Insert Contact Parallel.
 
 
@@ -194,7 +194,7 @@ Right-click it and choose Insert Contact Parallel.
 \section{Grafcet programming}
 
 Elements of grafcet programming are available in the right panel as well as on the top bar.
-Just like for ladder programming, local variables can be used to add intermediate variables that are not inputs or outputs (they are only usable in the current POU (program organization unit)). Here the POU is the PLC\_PRG file in grafcet laguage.
+Just like for ladder programming, local variables can be used to add intermediate variables that are not inputs or outputs (they are only usable in the current POU (program organization unit)). Here, the POU is the PLC\_PRG file in grafcet language.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -205,17 +205,17 @@ Just like for ladder programming, local variables can be used to add intermediat
 \end{figure}
 
 Once you've added some grafcet elements, you can create transition and actions to attach on it.
-There are two ways of adding actions of transitions on a grafcet network : direct or indirect.\\
-Direct adding means you write structured text logic expressions directly in the boxes (Transitions on \vref{fig:grafcet}).\\
+There are two ways to add actions or transitions on a grafcet network : direct or indirect.\\
+Direct adding means you write structured text logic expressions directly in the boxes (Transitions on figure~\vref{fig:grafcet}).\\
 Indirect adding means you have to create a transition or action file (right click on PLC\_PRG->Add object) in any format you want (ladder, structured text...) and detail your expressions for transitions or actions in this file.\\
-For actions, a letter lets you choose whether you want you action the be delayed, time limited, etc... (the default choice is "N" : the action is active as long as the step is active).
+For actions, a letter lets you choose whether you want you action the be delayed, time limited, and so on (the default choice is ``N'' : the action is active as long as the step is active).
 See figure \vref{fig:tabgraf} for details on the different possibilities.
 
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=300px]{tableaugrafcet.png}
 	\end{center}
-\caption{Action modes (``Qualifiers for Actions in SFC")}
+\caption{Action modes (``Qualifiers for Actions in SFC'')}
 \label{fig:tabgraf}
 \end{figure}
 
@@ -242,7 +242,7 @@ To fire the transition after two seconds have been spent in the step \texttt{ste
 \end{figure}
 
 \subsection{Convergence and divergence}
-Convergences and divergences are generated using the ``branch" tool.
+Convergences and divergences are generated using the ``branch'' tool.
 To create an AND-divergence, select a step you want to be part of a branch, and create a left or right branch (either \textit{via} right-click or the toolbar).
 To create an OR-divergence, do the same thing, but selecting a transition.
 
@@ -253,7 +253,7 @@ Several modules can be quite useful:
   \item[TON] Timer
 \end{description}
 
-Note that to easily obtain the documentation to a specific module, right-click on it $\rightarrow$ ``browse" $\rightarrow$ ``Go to definition".
+Note that to easily obtain the documentation to a specific module, right-click on it $\rightarrow$ ``browse'' $\rightarrow$ ``Go to definition''.
 
 
 
@@ -268,7 +268,7 @@ Note that to easily obtain the documentation to a specific module, right-click o
 
 \section{Simulation and visualization}
 \subsection{Setup}
-Select simulation from the dropdown menu "Online" so that it ends up checked.
+Select simulation from the dropdown menu ``Online'' so that it ends up checked.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -278,9 +278,9 @@ Select simulation from the dropdown menu "Online" so that it ends up checked.
 \label{fig:simu}
 \end{figure}
 
-Then, from the same menu, select login. You are now in simulation mode (fig \vref{fig:simu_win})
-There it is possible to start or stop the simulation by clicking on the "play" or "stop" button of the top bar.
-It is also possible to assign (or force) values to variables by simply clicking several times on the variable. When your input variables have the wanted states go to Debug->Write(or Force) Value to assign (or force) the values to the system.\\
+Then, from the same menu, select login. You are now in simulation mode (fig \vref{fig:simu_win}).
+There it is possible to start or stop the simulation by clicking on the ``play'' or ``stop'' button of the top bar.
+It is also possible to assign (or force) values to variables by simply clicking several times on the variable. When your input variables have the wanted states go to Debug->Write (or Force) Value to assign (or force) the values to the system.\\
 The network should response according to your inputs.
 
 \begin{figure}[h!]
@@ -293,8 +293,8 @@ The network should response according to your inputs.
 
 \subsection{Visualization}
 
-Double click on the Visualization you created during the setup of the project, you should get to the vizualization windows.\\
-NB : The project needs to be ``Offline" to allow the modification of the visualization (Online->Logout in the top bar).\\
+Double click on the Visualization you created during the setup of the project, you should get to the vizualization window.\\
+NB : The project needs to be ``Offline'' to allow the modification of the visualization (Online->Logout in the top bar).\\
 There you can add objects from the toolbox that can be linked to the different variables you created in your project (fig \vref{fig:prop})
 
 \begin{figure}[h!]
@@ -314,11 +314,11 @@ There you can add objects from the toolbox that can be linked to the different v
 \label{fig:prop}
 \end{figure}
 
-The visualization can then be used in sync with the simulation of the system by puting the project back online (Online->login menu in the top bar)
+The visualization can then be used in sync with the simulation of the system by setting the project back online (Online->login menu in the top bar)
 
 \subsubsection{Troubleshooting}
-Should the simulation throw a ``License not found" error, it's probably because of the visualization.
-Try removing the ``visualization manager" from the project tree, keeping only the ``visualization".
+Should the simulation throw a ``License not found'' error, it's probably because of the visualization.
+Try removing the ``visualization manager'' from the project tree, keeping only the ``visualization''.
 \end{document}
 
 %\vref{fig:RISC}
