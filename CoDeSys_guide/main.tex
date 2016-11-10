@@ -341,9 +341,14 @@ There you can add objects from the toolbox that can be linked to the different v
 
 The visualization can then be used in sync with the simulation of the system by setting the project back online (Online->login menu in the top bar)
 
-\subsubsection{Troubleshooting}
-Should the simulation throw a ``License not found'' error, it's probably because of the visualization.
-Try removing the ``visualization manager'' from the project tree, keeping only the ``visualization''.
+\subsection{Troubleshooting}
+\begin{itemize}
+	\item Should the simulation throw a ``License not found'' error, it's probably because of the visualization.
+	Try removing the ``visualization manager'' from the project tree, keeping only the ``visualization''.
+
+	\item You can import a project from an older version of CodeSys to a newer one, but you will not be able to simulate it.
+	If you want to simulate it, you need to create a new project, not only a new diagram.
+\end{itemize}
 \end{document}
 
 %\vref{fig:RISC}
