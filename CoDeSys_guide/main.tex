@@ -167,21 +167,12 @@ You can switch from one to the other using the two small buttons \includegraphic
 \end{figure}
 
 \subsection{Syntax}
-The syntax of the variables is such that their name can not contain the dot ``.'' character.
+The syntax of the variables is such that their name can not contain the dot ``." character.
 Past this detail, the grammar is as follows: \texttt{variable\_name: Type := value;}, the \texttt{value} part being facultative.
 
 \subsection{Types}
-See ``Data type'' in the doc.
+See ``Data type" in the doc.
 
-
-
-% ##         ######     
-% ##         ##    ##   
-% ##         ##     ##  
-% ##         ##     ##  
-% ##         ##     ##  
-% ##         ##    ##   
-% #########  ######     
 
 \section{Ladder programming}
 
@@ -196,7 +187,7 @@ Local variables can be used to add intermediate variables that are not inputs or
 \label{fig:network}
 \end{figure}
 
-You can select variables to assign to the different elements of your network by clicking on the ``...'' icon next to the name of the element (which is ``???'' by default).
+You can select variables to assign to the different elements of your network by clicking on the ``..." icon next to the name of the element (which is ``???" by default).
 Then simply assign the variables by selecting them on figure~\ref{fig:sel}.
 
 \begin{figure}[h!]
@@ -208,19 +199,12 @@ Then simply assign the variables by selecting them on figure~\ref{fig:sel}.
 \end{figure}
 
 \paragraph{Edge detection}
-Add a contact to your network, then right-click it and change it to ``Edge Detection'' to get a rising edge detector.
+Add a contact to your network, then right-click it and change it to ``Edge Detection" to get a rising edge detector.
 Repeat the operation to have a falling edge detector.
 
 \paragraph{Parallel branch}
 In order to have a parallel branch that comes back up to the same output (like \texttt{Start\_1} and \texttt{Pump\_1} on fig~\ref{fig:network}), you first need an element on the network.
 Right-click it and choose Insert Contact Parallel.
-
-\paragraph{Variable assignment}
-Ladder diagrams are fundamentally boolean structures, handling boolean objects.
-When you want to assign a value to a non-boolean variable (\textit{e.g.} an INT), you need to use an extra block allowing you to integrate a different paradigm into LD.
-
-This block is the ``Execute'' block that you can find in the ``General'' submenu of the ToolBox.
-Inside of it, you can type ST instructions, such as ``a := 1;'' to assign a value to the variable \texttt{a}.
 
 
 
