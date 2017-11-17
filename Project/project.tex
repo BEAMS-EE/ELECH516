@@ -1,0 +1,113 @@
+\documentclass{../template/tp}
+\usepackage[utf8x]{inputenc}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{wasysym} %smiley
+\usepackage{hyperref}% hyperliens
+\usepackage{tikz}
+\usetikzlibrary{babel,positioning,calc}
+\usepackage[]{circuitikz}
+\usepackage{textcomp}
+% \usepackage{minted}
+\usepackage[long]{datetime}
+\usepackage{gensymb} % \ohm, celsius
+\usepackage{framed}
+\usepackage{pdfpages}
+\usepackage{todonotes}
+\usepackage{enumitem}
+\usepackage{ marvosym }
+\usepackage{qrcode}%Don't forget to escape the "#", as the href package requires.
+\usepackage{tabularx}
+
+\usepackage{mathastext} % math as standfard text : units are respecting typography conventions.
+\usepackage{fancyhdr}
+% \langexam{frenchb}
+
+\usepackage{subcaption}
+
+\graphicspath{{imgs/}}
+
+\newcommand{\fileTitle}{Project 2017 - 2018}
+
+\newcommand{\version}{v1.0.0}
+
+\newcommand{\mnemonic}{ELEC-H-516}
+\newcommand{\courseName}{Programmable Logic Controllers}
+
+\newboolean{koriG}
+\ifx\koriG\undefined
+\correction{false}
+\else
+\correction{true}
+\fi
+
+% \correction{false}
+% \correction{true}
+
+\author{The Fantastic Four}
+
+
+%% fancy header & foot
+\pagestyle{fancy}
+\lhead{[\mnemonic] \courseName\\ \fileTitle}
+\rhead{\version\\ page \thepage}
+\cfoot{}
+%%
+
+\pdfinfo{
+/Author (ULB -- BEAMS)
+/Title (\mnemonic, \fileTitle)
+/ModDate (D:\pdfdate)
+
+}
+\hypersetup{
+pdftitle={[\mnemonic] \courseName : \fileTitle},
+pdfauthor={©2017 ULB - BEAMS  },
+pdfsubject={\fileTitle}
+}
+
+
+\setlength{\parskip}{0.5cm plus4mm minus3mm} %espacement entre §
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\tptitle{}{\fileTitle}
+
+\vspace{-1cm}
+
+\rule{\linewidth}{.5pt}
+
+The purpose of the project is to model behavior of the elevator that serves three different floors.
+The system is equipped with	
+\begin{itemize}
+	\item{6 sensors}
+	\begin{itemize}
+		\item{3 level captors (AtLevel1, AtLevel2, AtLevel3).}
+		\item{2 end-position sensors (Bottom, Top) which the sole purpose is to detect if the elevator reached either end of the shaft}
+		\item{1 overweight sensor}
+	\end{itemize}
+  	\item{6 command buttons}
+  	\begin{itemize}
+  		\item 3 calling buttons (Call1, Call2, Call3) at each floor
+  		\item 3 destination buttons (GoLevel1, GoLevel2, GoLevel3) inside the elevator
+  	\end{itemize}
+  \item{2 actuators: commands UP and DOWN that drive the elevator motor for the given direction.}
+\end{itemize}
+You do not need to take the elevator door into account.
+
+\Question{
+	Create an SFC that enables the control of the elevator and shows the correct operation for arbitrary use-case scenarios. System reset positions the elevator at Level1 (this can either be an automatic reset at the end of each operation, or a manual reset from a control room). The elevator can be called only when not in use (there is no call memory yet). When the elevator is in use, a BUSY signal is shown on the control table of each floor. The elevator accepts to go to the required destination only if there is no overweight.
+}{}
+
+\Question{
+	Starting from the above description, add the memory functionality to the SFC of the elevator command. The memory keeps track of the calls, but the priority is assigned according to the proximity rule. Thus, if the elevator is at floor 1 and somebody calls at level 3, the elevator will go up, but will stop at level 2, if there was a request on that floor when the elevator was on his way from level 1 to 3, then it will go to level 3 before processing the request that may have been made by the person who got in at level 2.
+}{}
+
+
+\end{document}
