@@ -32,7 +32,7 @@
 
 \graphicspath{{imgs/}}
 
-\newcommand{\fileTitle}{Project 2017 - 2018}
+\newcommand{\fileTitle}{Project 2018 - 2019}
 
 \newcommand{\version}{v1.0.0}
 
@@ -67,7 +67,7 @@
 }
 \hypersetup{
 pdftitle={[\mnemonic] \courseName : \fileTitle},
-pdfauthor={©2017 ULB - BEAMS  },
+pdfauthor={©2018 ULB - BEAMS  },
 pdfsubject={\fileTitle}
 }
 
@@ -83,12 +83,12 @@ pdfsubject={\fileTitle}
 
 \rule{\linewidth}{.5pt}
 
-The purpose of the project is to model behavior of the elevator that serves three different floors.
+The purpose of the project is to model the behavior of an elevator that serves three different floors.
 The system is equipped with	
 \begin{itemize}
 	\item{6 sensors}
 	\begin{itemize}
-		\item{3 level captors (AtLevel1, AtLevel2, AtLevel3).}
+		\item{3 level sensors (AtLevel1, AtLevel2, AtLevel3).}
 		\item{2 end-position sensors (Bottom, Top) which the sole purpose is to detect if the elevator reached either end of the shaft}
 		\item{1 overweight sensor}
 	\end{itemize}
@@ -102,12 +102,18 @@ The system is equipped with
 You do not need to take the elevator door into account.
 
 \Question{
-	Create an SFC that enables the control of the elevator and shows the correct operation for arbitrary use-case scenarios. System reset positions the elevator at Level1 (this can either be an automatic reset at the end of each operation, or a manual reset from a control room). The elevator can be called only when not in use (there is no call memory yet). When the elevator is in use, a BUSY signal is shown on the control table of each floor. The elevator accepts to go to the required destination only if there is no overweight.
+	Create an SFC that enables the control of the elevator and shows the correct operation for arbitrary use-case scenarios. At startup, the system reset the elevator position at Level1 (this can either be an automatic reset at the end of each operation, or a manual reset from a control room). The elevator can be called only when not in use (there is no call memory yet). When the elevator is in use, a BUSY signal is shown on the control table of each floor. The elevator accepts to go to the required destination only if there is no overweight.
 }{}
 
 \Question{
 	Starting from the above description, add the memory functionality to the SFC of the elevator command. The memory keeps track of the calls, but the priority is assigned according to the proximity rule. Thus, if the elevator is at floor 1 and somebody calls at level 3, the elevator will go up, but will stop at level 2, if there was a request on that floor when the elevator was on his way from level 1 to 3, then it will go to level 3 before processing the request that may have been made by the person who got in at level 2.
 }{}
 
+This is a result oriented project: by the end we should be able to implement your solution directly into a PLC and it should work.
+You are allowed to use any languages that comes with PLC (LD, SFC, ST or IL) as long as you do it well. The clarity and extensibility of your code will be evaluated.
+
+Don't simulate movements with timers, use the sensors to know the elevator position.\\
+Don't modify any input variable inside the code, those should only be read.\\
+Make sure to make a well designed visualisation.
 
 \end{document}
