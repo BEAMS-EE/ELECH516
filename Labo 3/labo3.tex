@@ -35,7 +35,7 @@
 \newcommand{\labTitle}{GRAFCET}
 \newcommand{\labNumber}{3}
 
-\newcommand{\version}{v1.0.0}
+\newcommand{\version}{v2.0.0}
 
 \newcommand{\mnemonic}{ELEC-H-516}
 \newcommand{\courseName}{Programmable Logic Controllers}
@@ -102,11 +102,15 @@ pdfsubject={\labTitle}
 \newpage
 
 \Question{
-	Imagine a wagon in the position $ A_{1} $ where he needs to pick-up some useful load. When the wagon gets the load, he can go to the position $ B_{1} $ to discharge the load. This process is controlled with the bouton $ d_{A1} $. Immediately after the loading is complete, the wagon moves towards the position $ B_{1} $, to disembark the load. If the disembark position is free, wagon should move forward to the positions $ C $, to actually discharge the load. Once the load is off, the wagon moves back to the position $ A_{1} $. Note that if for some reason the position $ C $ is occupied (not free), the wagon should wait in $ B_{1} $.
+	Imagine a system of wagons that need to transport some useful load from multiple points $ A_{i} $ to $ C $. 
+	The disembarking position $ C $ is common for few wagons.
+	At position $ A_{i} $, a worker manually charge the wagon, then presses the $ d_{Ai} $ button to indicate that he finished.
+	The wagon is then moved toward a temporary position $ B_{i} $.
+	Since only one wagon at a time can discharge its load, it should wait at $ B_{i} $ until $ C $ is freed.
+	The discharge of the cart takes around 20 seconds.
+	For this exercise consider the case of two wagons as illustrated bellow.
 
-	The disembarking position $ C $ is common for few wagons that can pick-up the load at different positions and discharge it at the same position $ C $. For this exercise consider the case of two wagons (the second one being marked with $ A_{2} $).
-
-	Build the SFC that controls the process described above and provide the necessary simulation environment.
+	Build the SFC that controls the process and provide the necessary simulation environment.
 	
 	\begin{figure}[h]
 		\centering
