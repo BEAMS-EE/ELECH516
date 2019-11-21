@@ -35,7 +35,7 @@
 \newcommand{\labTitle}{Ladder diagrams}
 \newcommand{\labNumber}{1}
 
-\newcommand{\version}{v1.0.0}
+\newcommand{\version}{v1.0.1}
 
 \newcommand{\mnemonic}{ELEC-H-516}
 \newcommand{\courseName}{Programmable Logic Controllers}
@@ -90,7 +90,7 @@ Spend some time to browse (and read) the ``Basic usage of CoDeSys 3.5'' supplied
 \Question{
 	Consider the reservoir system shown on Figure 1. We have water level indicators marked: \texttt{I0.0} and \texttt{I0.1}.
 	The sensors indicate 1 when they are fully immersed in the water.
-	We want to maintain the level in the reservoir in such a way, so that the water level never goes bellow the level marked with the sensor \texttt{I0.1} (Figure~\ref{fig:reservoir-empty}).
+	We want to maintain the level in the reservoir in such a way that the tank is refiled up to \texttt{I0.0} as soon as the level get below \texttt{I0.1} (Figure~\ref{fig:reservoir-empty}).
 	The level is maintained using a water pump controlled by the variable \texttt{Q0.0}.
 	Establish the Ladder diagram of the problem and show the correct operation sequence.
 }{
